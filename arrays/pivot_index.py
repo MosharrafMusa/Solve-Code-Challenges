@@ -31,3 +31,21 @@ def pivot_index(nums):
 print(pivot_index([1, 3, 7, 6, 8, 3]))
 print(pivot_index([1, 2, 3]))
 print(pivot_index([11, 7, 11]))
+
+# O(n) solution ...dynamic programming
+
+
+def pivot_index_2(nums):
+    sum_l = 0
+    sum_r = sum(nums)
+    for i in range(len(nums)):
+        sum_r -= nums[i]
+        if sum_l == sum_r:
+            return i
+        sum_l += nums[i]
+    return -1
+
+
+print(pivot_index_2([1, 3, 7, 6, 8, 3]))
+print(pivot_index_2([1, 2, 3]))
+print(pivot_index_2([11, 7, 11]))

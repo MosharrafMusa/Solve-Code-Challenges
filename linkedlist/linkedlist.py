@@ -1,33 +1,67 @@
-class Node:
-    def __init__(self, data=None, next=None):
+class node:
+    def __init__(self, data=None):
         self.data = data
-        self.next = next
+        self.next = None
 
 
-class LinkedList:
+class linked_list:
     def __init__(self):
-        self.head = None
+        self.head = node()
 
-    def insert_at_begining(self, data):
-        node = Node(data, self.head)
-        self.head = node
+    # Adds new node containing 'data' to the end of the linked list.
+    def append(self, data):
+        new_node = node(data)
+        cur = self.head
+        while cur.next != None:
+            cur = cur.next
+        cur.next = new_node
 
-    def print(self):
-        if self.head is None:
-            print("Linked List is empty")
+    # Returns the length (integer) of the linked list.
+    def length(self):
+        cur = self.head
+        total = 0
+        while cur.next != None:
+            total += 1
+            cur = cur.next
+        return total
+
+    # Prints out the linked list in traditional Python list format.
+    def display(self):
+        elems = []
+        cur_node = self.head
+        while cur_node.next != None:
+            cur_node = cur_node.next
+            elems.append(cur_node.data)
+        print(elems)
+
+    # Returns the value of the node at 'index'.
+    def get(self, index):
+        if index >= self.length() or index < 0:  # added 'index<0' post-video
+            print("ERROR: 'Get' Index out of range!")
+            return None
+        cur_idx = 0
+        cur_node = self.head
+        while True:
+            cur_node = cur_node.next
+            if cur_idx == index:
+                return cur_node.data
+            cur_idx += 1
+
+    # Deletes the node at index 'index'.
+    def erase(self, index):
+        if index >= self.length() or index < 0:  # added 'index<0' post-video
+            print("ERROR: 'Erase' Index out of range!")
             return
+        cur_idx = 0
+        cur_node = self.head
+        while True:
+            last_node = cur_node
+            cur_node = cur_node.next
+            if cur_idx == index:
+                last_node.next = cur_node.next
+                return
+            cur_idx += 1
 
-        itr = self.head
-        llstr = ''
-        while itr:
-            llstr += str(itr.data) + '-->'
-            itr = itr.next
-
-        print(llstr)
-
-
-if __name__ == '__main__':
-    ll = LinkedList()
-    ll.insert_at_begining(5)
-    ll.insert_at_begining(7)
-    ll.print()
+    # Allows for bracket operator syntax (i.e. a[0] to return first item).
+    def __getitem__(self, index):
+        return self.get(index)

@@ -65,3 +65,66 @@ class linked_list:
     # Allows for bracket operator syntax (i.e. a[0] to return first item).
     def __getitem__(self, index):
         return self.get(index)
+
+#######################################################
+        # Functions added after video tutorial
+
+        # Inserts a new node at index 'index' containing data 'data'.
+        # Indices begin at 0. If the provided index is greater than or
+        # equal to the length of the linked list the 'data' will be appended.
+        def insert(self, index, data):
+            if index >= self.length() or index < 0:
+                return self.append(data)
+            cur_node = self.head
+            prior_node = self.head
+            cur_idx = 0
+            while True:
+                cur_node = cur_node.next
+                if cur_idx == index:
+                    new_node = node(data)
+                    prior_node.next = new_node
+                    new_node.next = cur_node
+                    return
+                prior_node = cur_node
+                cur_idx += 1
+
+        # Inserts the node 'node' at index 'index'. Indices begin at 0.
+        # If the 'index' is greater than or equal to the length of the linked
+        # list the 'node' will be appended.
+        def insert_node(self, index, node):
+            if index < 0:
+                print("ERROR: 'Erase' Index cannot be negative!")
+                return
+            if index >= self.length():  # append the node
+                cur_node = self.head
+                while cur_node.next != None:
+                    cur_node = cur_node.next
+                cur_node.next = node
+                return
+            cur_node = self.head
+            prior_node = self.head
+            cur_idx = 0
+            while True:
+                cur_node = cur_node.next
+                if cur_idx == index:
+                    prior_node.next = node
+                    return
+                prior_node = cur_node
+                cur_idx += 1
+
+        # Sets the data at index 'index' equal to 'data'.
+        # Indices begin at 0. If the 'index' is greater than or equal
+        # to the length of the linked list a warning will be printed
+        # to the user.
+        def set(self, index, data):
+            if index >= self.length() or index < 0:
+                print("ERROR: 'Set' Index out of range!")
+                return
+            cur_node = self.head
+            cur_idx = 0
+            while True:
+                cur_node = cur_node.next
+                if cur_idx == index:
+                    cur_node.data = data
+                    return
+                cur_idx += 1

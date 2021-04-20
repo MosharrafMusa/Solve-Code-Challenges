@@ -1,2 +1,2 @@
-def array-pair-sum(arr, k):
+def array_pair_sum(arr, k):
     pass

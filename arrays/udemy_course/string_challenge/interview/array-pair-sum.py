@@ -1,3 +1,5 @@
+
+# 2 pointer O(n^2)
 def printPairs(arr, n, sum):
 
     # count = 0
@@ -19,7 +21,7 @@ sum = 6
 printPairs(arr, n, sum)
 
 
-# sort & binary search
+# sort & binary search O(n.log(n))
 def pairedElements(arr, sum):
 
     low = 0
@@ -45,20 +47,19 @@ if __name__ == '__main__':
     pairedElements(arr, 6)
 
 
-def find_pair(arr, k):
-    seen = set()
-    output = set()
-
-    for i in arr:
-        target = i-k
-        if target not in seen:
-            seen.add(i)
-        else:
-            output.add(i)
-
-    print(len(output))
+# using dict hash
 
 
-arr = [1, 3, 2, 2]
-k = 4
-find_pair(arr, k)
+def find_sum_pairs(num, target):
+    extra = {}
+    result = []
+    for i in range(len(num)):
+        tmp = target-num[i]
+        if tmp in extra:
+            result.append((num[extra[tmp]], num[i]))
+        extra[num[i]] = i
+    print(result)
+
+
+num = [1, 3, 2, 2, 5, 7]
+find_sum_pairs(num, 4)

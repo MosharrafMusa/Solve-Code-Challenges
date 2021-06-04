@@ -14,11 +14,17 @@
 # the digits in each iteration.
 
 number = 123
-
 sum_of_digits = 0
 for digit in str(number):
     # turn to string to iterate through
-
     sum_of_digits += int(digit)
-
 print(sum_of_digits)
+
+
+# using sum function
+def addTwoDigits(n):
+    sum_of_digits = sum(int(digit) for digit in str(n))
+    return sum_of_digits
+
+
+print(addTwoDigits(48))
